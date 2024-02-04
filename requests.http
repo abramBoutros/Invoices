@@ -1,0 +1,107 @@
+@host = http://localhost:3000
+@contentType = application/json
+@access_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAZXhhbXBsZS5jb20iLCJzdWIiOjIsImlhdCI6MTcwNzA1NjUwOSwiZXhwIjoxNzA3NjYxMzA5fQ.Z8QkBgOi4kM5gGWR79K9bi6SN0UnwFkf79eEuC4_tjM
+
+# USER
+### Signup User
+POST {{host}}/users/signup
+Content-Type: {{contentType}}
+
+{
+  "email": "user@example.com",
+  "password": "securePassword123"
+}
+
+### Login User
+POST {{host}}/users/login
+Content-Type: {{contentType}}
+
+{
+  "email": "user@example.com",
+  "password": "securePassword123"
+}
+
+# Authorization: Bearer {{access_token}}
+
+# ITEM
+### Create Item
+POST {{host}}/items
+Content-Type: {{contentType}}
+
+{
+  "name": "Sample Item 3",
+  "price": 99.99
+}
+
+### Get All Items
+GET {{host}}/items
+Content-Type: {{contentType}}
+
+### Get Single Item
+GET {{host}}/items/2  
+Content-Type: {{contentType}}
+
+### Update Item
+PATCH {{host}}/items/1
+Content-Type: {{contentType}}
+
+{
+  "name": "Updated Item Name",
+  "price": 109.99
+}
+
+### Delete Item
+DELETE {{host}}/items/1
+Content-Type: {{contentType}}
+
+
+# INVOICE
+### Create Invoice
+POST {{host}}/invoices
+Authorization: Bearer {{access_token}}
+Content-Type: {{contentType}}
+
+{
+  "userId": 1,
+  "items": [
+    {
+      "itemId": 3,
+      "quantity": 2
+    },
+    {
+      "itemId": 2,
+      "quantity": 1
+    }
+  ]
+}
+
+### Get All Invoices
+GET {{host}}/invoices
+Authorization: Bearer {{access_token}}
+Content-Type: {{contentType}}
+
+### Get Single Invoice
+GET {{host}}/invoices/2
+Authorization: Bearer {{access_token}}
+Content-Type: {{contentType}}
+
+# ### Update Invoice
+# PATCH {{host}}/invoices/1
+# Authorization: Bearer {{access_token}}
+# Content-Type: {{contentType}}
+
+# {
+#   "items": [
+#     {
+#       "itemId": 1,
+#       "quantity": 3,
+#       "price": 99.99
+#     }
+#   ],
+#   "totalPrice": 299.97
+# }
+
+# ### Delete Invoice
+# DELETE {{host}}/invoices/1
+# Authorization: Bearer {{access_token}}
+# Content-Type: {{contentType}}
